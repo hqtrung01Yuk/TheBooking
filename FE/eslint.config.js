@@ -1,31 +1,3 @@
-import js from "@eslint/js";
-import globals from "globals";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
-
-export default [
-  { ignores: ["dist"] },
-  {
-    files: ["**/*.{js,jsx}"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      globals: globals.browser,
-      parserOptions: {
-        ecmaFeatures: { jsx: true },
-        sourceType: "module",
-      },
-    },
-    settings: { react: { version: "19.0" } },
-    plugins: {
-      react,
-      "react-hooks": reactHooks,
-    },
-    rules: {
-      ...js.configs.recommended.rules,
-      ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      "react/react-in-jsx-scope": "off", // ✅ Tắt lỗi không cần thiết
-      "react/jsx-no-target-blank": "off",
-    },
-  },
-];
+version https://git-lfs.github.com/spec/v1
+oid sha256:c884e1a1d1888ad8a66ad88d84ee46b46c76a3b0584b862edb0a734d697fe9c3
+size 813

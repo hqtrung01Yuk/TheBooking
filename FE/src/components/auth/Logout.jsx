@@ -1,31 +1,3 @@
-import React, { useContext } from "react";
-import { AuthContext } from "./AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
-
-const Logout = () => {
-  const auth = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    auth.handleLogout();
-    navigate("/", { state: { message: " You have been logged out!" } });
-  };
-
-  return (
-    <>
-      <li>
-        <Link className="dropdown-item" to={"/profile"}>
-          Profile
-        </Link>
-      </li>
-      <li>
-        <hr className="dropdown-divider" />
-      </li>
-      <button className="dropdown-item" onClick={handleLogout}>
-        Logout
-      </button>
-    </>
-  );
-};
-
-export default Logout;
+version https://git-lfs.github.com/spec/v1
+oid sha256:974314b524a6b948e27eff5c689e4021442844eee4a3712ce36c1830157f191e
+size 742

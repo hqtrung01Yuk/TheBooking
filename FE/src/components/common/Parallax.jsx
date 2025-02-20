@@ -1,19 +1,3 @@
-import { Container } from "react-bootstrap";
-
-const Parallax = () => {
-  return (
-    <div className="parallax mb-5">
-      <Container className="text-center px-5 py-5 justify-content-center">
-        <div className="animated-texts bounceIn">
-          <h1>
-            Welcome to <span className="hotel-color">The Booking</span>
-          </h1>
-
-          <h3>We offer the best services for all your needs.</h3>
-        </div>
-      </Container>
-    </div>
-  );
-};
-
-export default Parallax;
+version https://git-lfs.github.com/spec/v1
+oid sha256:48e726d687d94cd6a4898529816faadc3902f1e50aa330d67f393f01381bc7bf
+size 511

@@ -1,13 +1,3 @@
-/* eslint-disable react/prop-types */
-const Header = ({ title }) => {
-  return (
-    <header className="header">
-      <div className="overlay"></div>
-      <div className="container">
-        <h1 className="header-title text-center">{title}</h1>
-      </div>
-    </header>
-  );
-};
-
-export default Header;
+version https://git-lfs.github.com/spec/v1
+oid sha256:e747f3a356cf5a6e44eaa78f42dcefd11fe3c269ee8253e54d447761130da4c9
+size 319

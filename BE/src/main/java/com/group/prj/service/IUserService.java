@@ -1,17 +1,3 @@
-package com.group.prj.service;
-
-import java.util.List;
-
-import com.group.prj.model.User;
-
-public interface IUserService {
-
-    User registerUser(User user);
-
-    List<User> getUsers();
-
-    void deleteUser(String email);
-
-    User getUser(String name);
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:55732566bdd74225ead47c66f752ff5a2f3002429b1170a86951e0d58bceb79f
+size 273

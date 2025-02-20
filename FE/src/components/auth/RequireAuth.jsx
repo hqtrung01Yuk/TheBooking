@@ -1,13 +1,3 @@
-/* eslint-disable react/prop-types */
-import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
-
-const RequireAuth = ({ children }) => {
-  const user = localStorage.getItem("userId");
-  const location = useLocation();
-  if (!user) {
-    return <Navigate to="/login" state={{ path: location.pathname }} />;
-  }
-  return children;
-};
-export default RequireAuth;
+version https://git-lfs.github.com/spec/v1
+oid sha256:a38aecad35f6423a02297e58999ed062dc1db7a2e49a12d69924a1597441782b
+size 400

@@ -1,13 +1,3 @@
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
-import { BrowserRouter } from "react-router-dom";
-
-// Fix error 'React10.useContext(...)' as it is null.
-// Must be create once
-const root = createRoot(document.getElementById("root"));
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
+version https://git-lfs.github.com/spec/v1
+oid sha256:c03604fed40ec5b31fd3ea6c474d0bc2287daa2135517725d68288207fe3bcd6
+size 349

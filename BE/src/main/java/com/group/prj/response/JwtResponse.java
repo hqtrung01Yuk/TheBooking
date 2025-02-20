@@ -1,23 +1,3 @@
-package com.group.prj.response;
-
-import java.util.List;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-public class JwtResponse {
-    private Long id;
-    private String email;
-    private String token;
-    private String type = "Bearer";
-    private List<String> roles;
-
-    public JwtResponse(Long id, String email, String token, List<String> roles) {
-        this.id = id;
-        this.email = email;
-        this.token = token;
-        this.roles = roles;
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:68c1bceca82f39eae790fcfd7c4658ad32878a9d17dcbdcfbfd31868f9d8feb4
+size 524

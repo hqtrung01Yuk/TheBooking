@@ -1,29 +1,3 @@
-/* eslint-disable react/prop-types */
-const RoomPaginator = ({ currentPage, totalPages, onPageChange }) => {
-  // Tạo danh sách số trang
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
-
-  return (
-    <nav>
-      <ul className="pagination justify-content-center mt-3">
-        {pageNumbers.map((pageNumber) => (
-          <li
-            key={pageNumber}
-            className={`page-item z-0 ${
-              currentPage === pageNumber ? "active" : ""
-            }`}
-          >
-            <button
-              className="page-link"
-              onClick={() => onPageChange(pageNumber)}
-            >
-              {pageNumber}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
-
-export default RoomPaginator;
+version https://git-lfs.github.com/spec/v1
+oid sha256:42797281545172886e5a28ae22d058481a07062d87e3fc0eede66dbd5a65800f
+size 806

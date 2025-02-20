@@ -1,19 +1,3 @@
-package com.group.prj.service;
-
-import java.util.List;
-
-import com.group.prj.model.BookedRoom;
-
-public interface IBookingService {
-
-    List<BookedRoom> getAllBookingsByRoomId(Long roomId);
-
-    List<BookedRoom> getAllBookings();
-
-    BookedRoom findByBookingConfirmationCode(String confirmationCode);
-
-    String saveBooking(Long roomId, BookedRoom bookingRequest);
-
-    void cancleBooking(Long bookingId);
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d6ad2161f755ded4f89f2e46b87e04e4eccbefbf9b002708fdc8c1cd9e117cf9
+size 430

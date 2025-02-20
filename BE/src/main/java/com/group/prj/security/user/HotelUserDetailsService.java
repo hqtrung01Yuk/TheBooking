@@ -1,27 +1,3 @@
-package com.group.prj.security.user;
-
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-
-import com.group.prj.model.User;
-import com.group.prj.repository.UserRepository;
-
-import lombok.RequiredArgsConstructor;
-
-@Service
-@RequiredArgsConstructor
-public class HotelUserDetailsService implements UserDetailsService {
-
-    private final UserRepository userRepository;
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        return HotelUserDetails.buildUserDetails(user);
-    }
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:8c0a3a0099bf9bb5df266615d4ba5403ab41b06a51a2678034a1732c3ad7dc45
+size 918

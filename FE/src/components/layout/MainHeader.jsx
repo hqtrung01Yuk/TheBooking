@@ -1,16 +1,3 @@
-const MainHeader = () => {
-  return (
-    <header className="header-banner">
-      <div className="overlay"></div>
-      <div className="animated-texts overlay-content">
-        <h1>
-          Welcome to <span className="hotel-color">The Booking</span>
-        </h1>
-
-        <h4>Experience the Best Hospitality in Town</h4>
-      </div>
-    </header>
-  );
-};
-
-export default MainHeader;
+version https://git-lfs.github.com/spec/v1
+oid sha256:4decf1e842b66ee9abf9d37139039d53ca71b60a7970d1a2e60fe8c027a6fba5
+size 404

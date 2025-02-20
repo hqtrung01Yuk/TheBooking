@@ -1,18 +1,3 @@
-package com.group.prj.repository;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-import com.group.prj.model.BookedRoom;
-
-@Repository
-public interface BookingRepository extends JpaRepository<BookedRoom, Long> {
-
-    Optional<BookedRoom> findByBookingConfirmationCode(String confirmationCode);
-
-    List<BookedRoom> findByRoomId(Long roomId);
-
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c921955d91e518e56830be21cebc92437eb9c645d24e4512d421399f026a02b6
+size 480
