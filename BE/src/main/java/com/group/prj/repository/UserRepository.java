@@ -9,11 +9,9 @@ import com.group.prj.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
     boolean existsByEmail(String email);
 
     Optional<User> findByEmail(String email);
 
     void deleteByEmail(String email);
-
 }

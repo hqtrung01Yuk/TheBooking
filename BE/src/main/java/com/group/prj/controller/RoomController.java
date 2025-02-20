@@ -15,7 +15,7 @@ import javax.sql.rowset.serial.SerialException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,13 +30,12 @@ import com.group.prj.exception.PhotoRetrievalException;
 import com.group.prj.exception.ResourceNotFoundException;
 import com.group.prj.model.BookedRoom;
 import com.group.prj.model.Room;
-import com.group.prj.respone.RoomResponse;
+import com.group.prj.response.RoomResponse;
 import com.group.prj.service.BookingServiceImpl;
 import com.group.prj.service.IRoomService;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:5173") // Cho phép frontend truy cập
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rooms")
@@ -46,6 +45,7 @@ public class RoomController {
     private final IRoomService roomService;
 
     @PostMapping("/add/new-room")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponse> addNewRoom(
             @RequestParam("photo") MultipartFile photo,
             @RequestParam("roomType") String roomType,
@@ -64,6 +64,7 @@ public class RoomController {
     }
 
     @DeleteMapping("delete/room/{roomId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteRoom(@PathVariable("roomId") Long roomId) {
         roomService.deleteRoom(roomId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -126,6 +127,7 @@ public class RoomController {
     }
 
     @PutMapping("/update/{roomId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponse> updateRoom(
             @PathVariable("roomId") Long roomId,
             @RequestParam(required = false) String roomType,

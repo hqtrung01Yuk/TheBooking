@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-// import Logout from "../auth/Logout";
+import Logout from "../auth/Logout";
 
 const NavBar = () => {
   const [showAccount, setShowAccount] = useState(false);
@@ -43,13 +42,13 @@ const NavBar = () => {
                 Browse all rooms
               </NavLink>
             </li>
-            {/* {isLoggedIn && userRole === "ROLE_ADMIN" && ( */}
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to={"/admin"}>
-                Admin
-              </NavLink>
-            </li>
-            {/* )} */}
+            {isLoggedIn && userRole === "ROLE_ADMIN" && (
+              <li className="nav-item">
+                <NavLink className="nav-link" aria-current="page" to={"/admin"}>
+                  Admin
+                </NavLink>
+              </li>
+            )}
           </ul>
 
           <ul className="d-flex navbar-nav">
@@ -69,7 +68,6 @@ const NavBar = () => {
                 aria-expanded="false"
                 onClick={handleAccountClick}
               >
-                {" "}
                 Account
               </a>
 
@@ -95,7 +93,7 @@ const NavBar = () => {
                   </Link>
                 </li>
 
-                {/* {isLoggedIn ? (
+                {isLoggedIn ? (
                   <Logout />
                 ) : (
                   <li>
@@ -103,7 +101,7 @@ const NavBar = () => {
                       Login
                     </Link>
                   </li>
-                )} */}
+                )}
               </ul>
             </li>
           </ul>

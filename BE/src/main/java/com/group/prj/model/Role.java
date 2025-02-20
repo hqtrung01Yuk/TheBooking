@@ -25,21 +25,25 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Collection<User> user = new HashSet<>();
+    private Collection<User> users = new HashSet<>();
+
+    public Role(String name) {
+        this.name = name;
+    }
 
     public void assignRoleToUser(User user) {
         user.getRoles().add(this);
-        this.getUser().add(user);
+        this.getUsers().add(user);
     }
 
     public void removeUserFromRole(User user) {
         user.getRoles().remove(this);
-        this.getUser().remove(user);
+        this.getUsers().remove(user);
     }
 
     public void removeAllUsersFromRole() {
-        if (this.getUser() != null) {
-            List<User> roleUsers = this.getUser().stream().toList();
+        if (this.getUsers() != null) {
+            List<User> roleUsers = this.getUsers().stream().toList();
             roleUsers.forEach(this::removeUserFromRole);
         }
     }

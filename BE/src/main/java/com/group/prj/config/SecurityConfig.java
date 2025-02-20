@@ -16,40 +16,44 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import jakarta.servlet.MultipartConfigElement;
 
-@Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // Cho phép tất cả request
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+    // @Bean
+    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
+    // Exception {
+    // http
+    // .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+    // .csrf(csrf -> csrf.disable())
+    // .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // Cho phép tất
+    // cả request
+    // .sessionManagement(session ->
+    // session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        return http.build();
-    }
+    // return http.build();
+    // }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true); // Cho phép credentials
-        config.setExposedHeaders(List.of("Authorization")); // Nếu có header như Authorization cần phải expose
+    // @Bean
+    // public CorsConfigurationSource corsConfigurationSource() {
+    // CorsConfiguration config = new CorsConfiguration();
+    // config.setAllowedOrigins(List.of("http://localhost:5173"));
+    // config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    // config.setAllowedHeaders(List.of("*"));
+    // config.setAllowCredentials(true); // Cho phép credentials
+    // config.setExposedHeaders(List.of("Authorization")); // Nếu có header như
+    // Authorization cần phải expose
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
+    // UrlBasedCorsConfigurationSource source = new
+    // UrlBasedCorsConfigurationSource();
+    // source.registerCorsConfiguration("/**", config);
+    // return source;
+    // }
 
-    @Bean
-    public MultipartConfigElement multipartConfigElement() {
-        MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize(DataSize.ofMegabytes(1024)); // Giới hạn file tối đa
-        factory.setMaxRequestSize(DataSize.ofMegabytes(1024)); // Giới hạn tổng thể request size
-        return factory.createMultipartConfig();
-    }
+    // @Bean
+    // public MultipartConfigElement multipartConfigElement() {
+    // MultipartConfigFactory factory = new MultipartConfigFactory();
+    // factory.setMaxFileSize(DataSize.ofMegabytes(1024)); // Giới hạn file tối đa
+    // factory.setMaxRequestSize(DataSize.ofMegabytes(1024)); // Giới hạn tổng thể
+    // request size
+    // return factory.createMultipartConfig();
+    // }
 }

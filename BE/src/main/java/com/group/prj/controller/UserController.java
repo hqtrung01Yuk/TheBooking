@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,21 +22,21 @@ import lombok.RequiredArgsConstructor;
 @Validated
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin("http://localhost:5173")
 @RequestMapping("/user")
 public class UserController {
-    private IUserService userService;
+    private final IUserService userService;
 
     @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<User>> getUser() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.FOUND);
     }
 
     @GetMapping("/{email}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getUserByEmail(@PathVariable("email") String email) {
         try {
             User theUser = userService.getUser(email);
-
             return ResponseEntity.ok(theUser);
         } catch (UserAlreadyExistsException userException) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userException.getMessage());
@@ -47,10 +47,12 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{userId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or (hasRole('ROLE_USER') and #email == principal.username)")
     public ResponseEntity<String> deleteUser(@PathVariable("userId") String email) {
+        System.out.println("🗑 Trying to delete: " + email);
+
         try {
             userService.deleteUser(email);
-
             return ResponseEntity.ok("User deleted successfully!!");
         } catch (UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

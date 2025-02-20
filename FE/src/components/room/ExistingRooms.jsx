@@ -26,12 +26,11 @@ const ExistingRooms = () => {
 
     try {
       const result = await getAllRooms();
-      // console.log("Fetched rooms:", result); // Kiểm tra dữ liệu
       setRooms(result);
       setIsLoading(false);
     } catch (err) {
       console.error("Error fetching rooms:", err);
-      setErrorMessgae(err.message);
+      setErrorMessgae(err.message); // Ensure errorMessage is a string
     }
   };
 
@@ -57,13 +56,13 @@ const ExistingRooms = () => {
 
       if (result === "") {
         setSuccessMessage(`Room no ${roomId} was deleted`);
-
         fetchRooms();
       } else {
         console.error(`Error deleting room: ${result.message}`);
       }
     } catch (err) {
-      setErrorMessgae(err);
+      console.error("Error deleting room:", err);
+      setErrorMessgae(err.message); // Ensure errorMessage is a string
     }
 
     setTimeout(() => {
@@ -93,7 +92,8 @@ const ExistingRooms = () => {
             <div className="d-flex justify-content-between mb-3 mt-5">
               <h2>Existing rooms</h2>
             </div>
-
+            {errorMessage && <p className="text-danger">{errorMessage}</p>}
+            {successMessage && <p className="text-success">{successMessage}</p>}
             <Row>
               <Col md={6} className="mb-3 mb-md-0">
                 <RoomFilter data={rooms} setFilteredData={setFilteredRooms} />

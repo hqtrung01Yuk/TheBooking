@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +19,13 @@ import com.group.prj.exception.InvalidBookingRequestException;
 import com.group.prj.exception.ResourceNotFoundException;
 import com.group.prj.model.BookedRoom;
 import com.group.prj.model.Room;
-import com.group.prj.respone.BookingResponse;
-import com.group.prj.respone.RoomResponse;
+import com.group.prj.response.BookingResponse;
+import com.group.prj.response.RoomResponse;
 import com.group.prj.service.IBookingService;
 import com.group.prj.service.IRoomService;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 @RequestMapping("/bookings")
 @RestController
@@ -37,6 +36,7 @@ public class BookingController {
     private final IRoomService roomService;
 
     @GetMapping("/all-bookings")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<BookingResponse>> getAllBooking() {
         List<BookedRoom> bookings = bookingService.getAllBookings();
         List<BookingResponse> bookingResponses = new ArrayList<>();
@@ -97,4 +97,5 @@ public class BookingController {
     public void cancleBooking(@PathVariable("bookingId") Long bookingId) {
         bookingService.cancleBooking(bookingId);
     }
+
 }

@@ -11,10 +11,10 @@ const BookingForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [roomPrice, setRoomPrice] = useState(0);
-
+  const currentUser = localStorage.getItem("userId");
   const [booking, setBooking] = useState({
     guestFullName: "",
-    guestEmail: "",
+    guestEmail: currentUser,
     checkInDate: "",
     checkOutDate: "",
     numberOfAdults: 1,
@@ -95,7 +95,6 @@ const BookingForm = () => {
     return totalCount >= 1 && adultCount >= 1;
   };
 
-  // mai xu li
   // const isGuestCountValid = () => {
   //   const adultCount = parseInt(booking.numberOfAdults, 10);
   //   const childrenCount = parseInt(booking.numberOfChildren, 10);

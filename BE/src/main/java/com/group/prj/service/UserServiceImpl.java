@@ -2,6 +2,8 @@ package com.group.prj.service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,16 +26,32 @@ public class UserServiceImpl implements IUserService {
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
 
+    @Transactional
     @Override
     public User registerUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
-            throw new UserAlreadyExistsException(user.getEmail() + "already exists");
+            throw new UserAlreadyExistsException(user.getEmail() + " already exists");
+        }
+
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("Password cannot be null or empty");
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         System.out.println("Password of user: " + user.getPassword());
-        Role userRole = roleRepository.findByName("ROLE_USER").get();
+
+        Role userRole = roleRepository.findByName("ROLE_USER")
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
         user.setRoles(Collections.singletonList(userRole));
+
+        // Ensure roles are set
+        Set<Role> roles = user.getRoles().stream()
+                .map(role -> roleRepository.findByName(role.getName())
+                        .orElseThrow(() -> new RuntimeException("Role not found: " +
+                                role.getName())))
+                .collect(Collectors.toSet());
+        user.setRoles(roles);
 
         return userRepository.save(user);
     }
@@ -46,16 +64,20 @@ public class UserServiceImpl implements IUserService {
     @Transactional
     @Override
     public void deleteUser(String email) {
-        User user = getUser(email);
-
-        if (user != null) {
+        try {
+            if (!userRepository.existsByEmail(email)) {
+                throw new UsernameNotFoundException("User not found");
+            }
             userRepository.deleteByEmail(email);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
     @Override
     public User getUser(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
-
 }
