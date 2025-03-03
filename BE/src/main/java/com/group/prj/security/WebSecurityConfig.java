@@ -103,23 +103,20 @@ public class WebSecurityConfig {
     // }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer :: disable)
                 .exceptionHandling(
                         exception -> exception.authenticationEntryPoint(jwtAuthEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/rooms/**")
+                        .requestMatchers("/auth/**", "/rooms/**","/bookings/**")
                         .permitAll().requestMatchers("/roles/**").hasRole("ADMIN")
-                        .requestMatchers("/bookings/all-bookings").hasRole("ADMIN") // Chỉ ADMIN truy cập bookings
-                        .requestMatchers("/bookings/**").authenticated()
                         .anyRequest().authenticated());
-
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
+    
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
