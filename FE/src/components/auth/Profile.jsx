@@ -45,36 +45,20 @@ const Profile = () => {
     fetchUser();
   }, [token, userId]);
 
-<<<<<<< HEAD
   useEffect(() => {
     const fetchBookings = async () => {
       try {
+        console.log("Token:", token); // Kiểm tra token
         const response = await getBookingsByUserId(userId, token);
         setBookings(response);
       } catch (error) {
-        console.error("Error fetching bookings:", error.message);
+        console.log("Error fetching bookings:", error);
         setErrorMessage(error.message);
       }
     };
 
     fetchBookings();
   }, [userId, token]);
-=======
-useEffect(() => {
-  const fetchBookings = async () => {
-    try {
-      console.log("Token:", token);  // Kiểm tra token
-      const response = await getBookingsByUserId(userId, token);
-      setBookings(response);
-    } catch (error) {
-      console.log("Error fetching bookings:", error);
-      setErrorMessage(error.message);
-    }
-  };
-
-  fetchBookings();
-}, [userId, token]);
->>>>>>> 15630da (fix: the error authencation and for begin)
 
   const handleDeleteAccount = async () => {
     const confirmed = window.confirm(
