@@ -37,6 +37,14 @@ public class BookingServiceImpl implements IBookingService {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public List<BookedRoom> getBookingsByUserEmail(String email) {
+        return bookingRepository.findByGuestEmail(email);
+    }
+
+    @Override
+>>>>>>> 15630da (fix: the error authencation and for begin)
     public String saveBooking(Long roomId, BookedRoom bookingRequest) {
         if (bookingRequest.getCheckOutDate().isBefore(bookingRequest.getCheckInDate())) {
             throw new InvalidBookingRequestException("Check-in data must come before check-out date");

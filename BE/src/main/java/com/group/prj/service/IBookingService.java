@@ -16,4 +16,8 @@ public interface IBookingService {
 
     void cancleBooking(Long bookingId);
 
+<<<<<<< HEAD
+=======
+    List<BookedRoom> getBookingsByUserEmail(String email);
+>>>>>>> 15630da (fix: the error authencation and for begin)
 }
