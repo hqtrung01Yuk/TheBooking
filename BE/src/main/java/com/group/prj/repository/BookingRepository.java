@@ -15,8 +15,5 @@ public interface BookingRepository extends JpaRepository<BookedRoom, Long> {
 
     List<BookedRoom> findByRoomId(Long roomId);
 
-<<<<<<< HEAD
-=======
     List<BookedRoom> findByGuestEmail(String email);
->>>>>>> 15630da (fix: the error authencation and for begin)
 }
